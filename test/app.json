@@ -1,0 +1,16 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/assign_go/assign_go",
+    "pages/personal/personal"
+  ],
+  
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "快服务",
+    "navigationBarTextStyle":"#fff"
+  }
+  
+}

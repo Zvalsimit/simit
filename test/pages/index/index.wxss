@@ -1,0 +1,82 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header{
+  height: 3rem;
+  position: relative;
+}
+#personal{
+  width: 2.2rem;
+  height: 2.2rem;
+  margin: 0.3rem 0.3rem;
+}
+#logo{
+  width: 3.51rem;
+  height: 2rem;
+  position: absolute;
+  top:.5rem;
+  left: 8.245rem;
+}
+.sel_city{
+  position: absolute;
+  top:0rem;
+  right: .5rem;
+}
+.picker{
+  display: inline-block;
+  padding-top: 0;
+  line-height: 1rem;
+  font-size: .8rem;
+}
+#city_icon{
+  display: inline-block;
+  width: 0px;
+  height: 0px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #8A8A8A;
+  text-align: right;
+}
+.banner{
+  height:5rem;
+}
+.banner image{
+  width: 100%;
+}
+.menu_box{
+  width: 17.4rem;
+  padding:1rem .7rem;
+  margin: .6rem .6rem 0;
+  background: #fff;
+}
+.menu_left{
+  width: 3.3rem;
+  height: 3.3rem;
+  float: left;
+  border-radius: .5rem;
+}
+.menu_right{
+  width: 13.6rem;
+  padding-left:.5rem; 
+  float: left;
+}
+.menu_title{
+  display: inline-block;
+  margin-bottom: .3rem;
+}
+.menu_price{
+  float: right;
+  vertical-align:middle;
+}
+.menu_price_num{
+  color: #f46610;
+}
+.menu_dec{
+  display: block;
+  font-size: .85rem;
+  color: #8a8a8a;
+  line-height: 1.1rem;
+}

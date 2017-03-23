@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <link rel="icon" href="${static_path}images/icon.png">
+        <meta name="viewport" content="width=device-width">
+        <title>【${group_name}】本地即时生活服务平台_官网。</title>
+        <script src="js/jquery.js"></script>
+        <style>
+			body,*{
+				margin:0;
+				padding:0;
+				border:none;
+				box-sizing:border-box;
+			}
+			.col{
+				position:absolute;
+				height:100%;
+			}
+			.col-2{
+				width:20%;
+			}
+			.col-8{
+				width:80%;
+				left:20%;
+			}
+			.nav{
+				
+			}
+			#nav{
+				margin:10%;
+				line-height:2rem;
+			}
+			#nav li{
+				cursor:pointer;
+			}
+        </style>
+    </head>
+    <body>
+    	<section class="col col-2">
+        	<div class="nav">
+            	<ul id="nav">
+                	<li data-val="1">1111111</li>
+                    <li data-val="2">2222222</li>
+                </ul>
+            </div>
+        </section>
+        <section class="col col-8">
+        	<div id="main">
+            </div>
+        </section>
+    </body>
+    <script type="text/javascript">
+	$(function(){
+		$("#nav li").click(function(){
+			switch($(this).attr("data-val")){
+				case "1": $("#main").load("./1.html");
+				break;
+				case "2": $("#main").load("./2.html");
+				break;
+			}
+		})
+	})
+    </script>
+</html>

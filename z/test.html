@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+    	<div id="example"></div>
+    	<!--<script type="text/javascript">
+			/* min/max number in an array */
+var numbers = [15, 6, 2, 3, 7];
+
+/* using Math.min/Math.max apply */
+var max = Math.max.apply(null, numbers); /* This about equal to Math.max(numbers[0], ...) or Math.max(5, 6, ..) */
+var min = Math.min.apply(null, numbers);
+
+/* vs. simple loop based algorithm */
+max = -Infinity, min = +Infinity;
+
+for (var i = 0; i < numbers.length; i++) {
+  if (numbers[i] > max)
+    max = numbers[i];
+  if (numbers[i] < min) 
+    min = numbers[i];
+}
+function list() {
+	console.log(arguments)
+  return Array.prototype.slice.call(arguments);
+}
+
+var list1 = list(1, 2, 3); // [1, 2, 3]
+console.log(list1)
+function Point(x, y) {
+  this.x = x;
+  this.y = y;
+}
+
+Point.prototype.toString = function() { 
+  return this.x + ',' + this.y; 
+};
+
+var p = new Point(1, 2);
+console.log(p.toString()); // '1,2'
+
+var emptyObj = {};
+var YAxisPoint = Point.bind(emptyObj, 0/*x*/);
+var pp = new YAxisPoint(1);
+console.log(pp.toString())
+		</script>-->
+        <script>
+			console.log(null == undefined,undefined == false)
+			var a=[1, 2, 3];
+    		console.log(a.join());
+        </script>
+    </body>
+</html>

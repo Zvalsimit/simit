@@ -1,0 +1,76 @@
+<!--pay.wxml-->
+<view class="container_body">
+ <view class='group_body box_marB group_last'>
+    <view class="group_box grounp_list_flex">
+        <view>
+            <text class='gbox_top'>跑腿费</text>
+            <text class='menu_price_num'>{{orderInfo.all_exp}}元</text>
+        </view>
+        <view>
+            <text class='gbox_top'>路程</text>
+            <text>{{orderInfo.ship_distance}}km</text>
+        </view>
+        <view>
+            <text class='gbox_top'>期望时间</text>
+            <text>{{orderInfo.expected_time}}</text>
+        </view>
+    </view>
+    <view class="group_box">
+        <text class='gbox_left'>订单内容</text>
+        <text>{{orderInfo.order_info}}</text>
+    </view>
+    <view class="group_box">
+        <text class='gbox_left gbox_float'>备注</text>
+        <text class='menu_price_num'>{{orderInfo.order_extend_info}}</text>
+    </view>
+    <view class="group_box">
+        <text class='gbox_left'>配送要求</text>
+        <text>{{orderInfo.expected_time}}</text>
+    </view>
+    <view class="group_box">
+        <text class='gbox_left gbox_float'>发货信息</text>
+        <view class="gbox_right">
+            <text>{{orderInfo.supplier_area}}</text>
+            <text>{{orderInfo.supplier_address}}</text>
+            <text class='gbox_right_botton'>{{orderInfo.supplier_phone}}</text>
+        </view>
+    </view>
+    <view class="group_box box_marB">
+        <text class='gbox_left gbox_float'>收货信息</text>
+        <view class="gbox_right">
+            <text>{{orderInfo.receiver_area}}</text>
+            <text>{{orderInfo.receiver_address}}</text>
+            <text class='gbox_right_botton'>{{orderInfo.receiver_phone}}</text>
+        </view>
+    </view>
+  </view>
+  <view class='group_body box_marB group_last'>
+    <view class="group_box" bindTap='couponTap'>
+        <text class='gbox_left'>优惠券</text>
+        <text class='menu_price_num'>{{orderInfo.coupon_amount}}元</text>
+    </view>
+    <view class="group_box">
+        <text>支付方式</text>
+    </view>
+    <view class="group_box">
+        <text class='gbox_left'>公司结算</text>
+        <icon type="success_circle" class='icon'/>
+    </view>
+  </view>
+  <view class='group_body group_last' wx:if="{{!orderInfo.user_id}}">
+    <view class="group_box">
+        <input id="mobile" class="box_input" placeholder="手机号"></input>
+        <button class='box_btn' bindtap="acodeTap">获取验证码</button>
+    </view>
+    <view class="group_box">
+        <input id="acode" class="box_input" placeholder="验证码"></input>
+    </view>
+  </view>
+  <view class='group_footer'>
+    <view class='inline_block'>
+        <text class='footer_left'>支付金额</text>
+        <text class='menu_price_num'>{{orderInfo.all_expense}}元</text>
+    </view>
+    <button class='group_btn' type="primary" bindtap="sureOrderTap">确认下单</button>
+  </view>
+</view>

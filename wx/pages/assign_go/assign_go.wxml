@@ -1,0 +1,60 @@
+<!--assign_go.wxml-->
+<view class="container_body">
+  <view class="group_list group_list_h">
+    <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
+      <view class="picker">
+        选择时间<text>{{time}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class='group_body box_marB group_last'>
+    <view class="group_box">
+        <text class='gbox_left'>发货地</text>
+        <text bindtap='supplierFocus' class='gbox_input'>{{supplier_area}}</text>
+    </view>
+    <view class="group_box">
+        <input placeholder="门牌/楼层/店铺名（可不填）" bindblur='supAddress' value='{{supplier_address}}'/>
+    </view>
+    <view class="group_box">
+        <input placeholder="发货人电话" type='number' bindblur='supPhone' value='{{supplier_phone}}'/>
+    </view>
+    <view class="group_box">
+        <text class='gbox_left'>收货地</text>
+        <text bindtap='receiverFocus' class='gbox_input'>{{receiver_area}}</text>
+    </view>
+    <view class="group_box">
+        <input placeholder="门牌/楼层/店铺名（可不填）" bindblur='recAddress'/>
+    </view>
+    <view class="group_box box_marB">
+        <input placeholder="收货人电话" type='number' bindblur='recPhone'/>
+    </view>
+  </view>
+  <view class="group_list group_list_h">
+    <picker value="{{categories[category_ind]}}" range="{{categories}}" bindchange="bindCategoryChange">
+      <view class="picker">
+        选择品类<text>{{categories[category_ind]}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class="group_list">
+    <textarea placeholder="备注" value='{{order_extend_info}}' bindinput='bindextendInfo' />
+  </view>
+  <view class="group_list group_list_h grounp_list_flex">
+    <view id='heat_box' class='gbox_top' bindtap='chooseExtendTap'>
+      <icon class='icon' type="success_circle" color='{{heat_color}}'/>
+      <text>保温箱</text>
+    </view>
+    <view id='car_distribution' class='gbox_top' bindtap='chooseExtendTap'>
+      <icon class='icon' type="success_circle" color='{{car_color}}'/>
+      <text>汽车配送</text>
+    </view>
+  </view>
+  <view class="group_list group_list_h">
+    <input placeholder="请输入小费金额" focus="{{focus}}" typr='number' />
+  </view>
+  <view class='expense'>
+    服务费<text id='expense'>￥{{expense}}</text>
+  </view>
+  <button type="primary" class='primary' bindtap="primary">提交订单</button>
+</view>
+

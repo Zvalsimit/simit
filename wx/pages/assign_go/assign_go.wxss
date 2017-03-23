@@ -1,0 +1,42 @@
+/**assign_go.wxss**/
+.group_body{
+    background: #fff;
+}
+.group_last .group_box:last-child{
+    margin: 0;
+    padding:.4rem .8rem;
+}
+.box_marB{
+    margin-bottom: .8rem;
+}
+.gbox_left{
+    display: inline-block;
+    width: 4.5rem;
+}
+.gbox_input{
+  width: 13.9rem;
+  height: 1.4rem;
+  float: right;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.gbox_top{
+    display: block;
+    width: 9.15rem;
+    color: #8A8A8A;
+}
+.picker text{
+  margin-left: .5rem;
+}
+.expense{
+  text-align: center;
+  line-height: 2rem;
+}
+#expense{
+  color:#f46610;
+}
+.icon{
+  vertical-align:sub;
+  margin-right: 0.3rem;
+}

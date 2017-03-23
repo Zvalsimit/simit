@@ -1,0 +1,64 @@
+/**app.wxss**/
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding:0;
+  box-sizing: border-box;
+  background: #f2f2f2;
+  padding-bottom: 1.4rem;
+  color: #494949;
+}
+.container_body{
+  width: 100%;
+  min-height: 100%;
+  position: absolute;
+  background: #f2f2f2;
+  color: #494949;
+}
+.group_list{
+  padding-left: .8rem;
+  background: #FFF;
+  margin-bottom: .8rem;
+  border-top: 1px solid #EFEFEF;
+  border-bottom: 1px solid #EFEFEF;
+  position: relative;
+  font-size: .9rem;
+  line-height: 2.6rem;
+}
+.group_box{
+  padding-left: 0rem;
+  background: #FFF;
+  border-bottom: 1px solid #EFEFEF;
+  position: relative;
+  font-size: .9rem;
+  margin: 0 0.8rem;
+  line-height: 1.6rem;
+  padding: 0.4rem 0;
+  min-height: 1.4rem;
+}
+.group_list_h{
+  height: 2.6rem;
+  line-height: 2.6rem;
+}
+.grounp_list_flex{
+  display: flex;
+  flex-direction:row;
+  align-items: left;
+}
+.group_list input{
+  line-height: 1.6rem;
+  margin-top: .5rem;
+}
+.group_list textarea{
+  line-height: 1.6rem;
+  margin: .5rem 0;
+}
+.primary{
+  width: 15rem;
+  margin-bottom:1rem; 
+}
+icon{
+  font-size: 1rem;
+}

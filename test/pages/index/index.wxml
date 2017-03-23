@@ -1,0 +1,50 @@
+<!--index.wxml-->
+<view class="header">
+  <image src='{{personalUrl}}' bindtap="personalTap" id='personal'/>
+  <image src='{{logoUrl}}' bindtap="logoTap" id='logo'/>
+  <view class='sel_city'>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{city}}" class="picker">
+      <text>
+        {{city[index]}}
+      </text>
+    </picker>
+    <text id='city_icon'></text>
+  </view>
+</view>
+<swiper class='banner' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}" wx:key="*this">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image"/>
+    </swiper-item>
+  </block>
+</swiper>
+<view class="container">
+  <block wx:for='{{menu}}' wx:key="imgUrl">
+    <view  bindtap="bindViewTap" class="menu_box">
+      <image src="{{item.imgUrl}}" class="menu_left"/>
+      <view class='menu_right'>
+        <text class='menu_title'>{{item.title}}</text>
+        <view class='menu_price'><text class='menu_price_num'>￥{{item.pri}}</text>元</view>
+        <text class='menu_dec'>{{item.dec}}</text>
+        <text class='menu_dec'>{{item.pricerule}}</text>
+      </view>
+    </view>
+  </block>
+</view>
+<!--
+<view class="container">
+  <view  bindtap="bindViewTap" class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{webApi}}，{{userInfo.nickName}}</text>
+  </view>
+  <view wx:if="{{length > 5}}"> 1 </view>
+  <view wx:elif="{{length > 2}}"> 2 </view>
+  <view wx:else> 3 </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+  <view>{{text}}</view>
+<button bindtap="changeText"> Change normal data </button>
+</view>
+-->
+
