@@ -1,0 +1,99 @@
+# coding: utf-8
+<footer>
+    <div class="container footer">
+        <div id="footer">
+            <div class="footerCon">
+                <h4 class="footerConTit">APP下载</h4>
+                <img src="${static_path}images/ewn.png" width="140">
+            </div>
+            <div class="footerCon">
+                <h4 class="footerConTit">官方微信</h4>
+                <img src="${static_path}images/qrcoad.jpg" width="140">
+            </div>
+            <div class="footerCon">
+                <h4 class="footerConTit">新闻</h4>
+                <ul>
+                    <li><a href=" http://finance.21cn.com/newsdoc/zx/a/2016/0411/17/30894871.shtml" rel="nofollow" target="_blank">快服务商学院打造三四线城市创业者黄埔军校</a></li>
+                    <li><a href="http://toutiao.com/i6265237307486372353/" rel="nofollow" target="_blank">不烧钱的O2O | 别人都在北上广火拼，他偏跑去邢台、临汾、石家庄掘金</a></li>
+                    <li><a href="http://mt.sohu.com/20160429/n446871200.shtml" rel="nofollow" target="_blank">唐山世园会与唐山快服务联手为全球游客服务！</a></li>
+                    <li><a href="http://mt.sohu.com/20160419/n444903769.shtml" rel="nofollow" target="_blank">热烈庆祝石家庄快服务签约民企入冀投资合作洽谈会</a></li>
+                </ul>
+            </div>
+            <div class="footerCon">
+                <h4 class="footerConTit">运营中心</h4>
+                <ul>
+                    <li>电话：${contact['hotline']}</li>
+                    <li>培训时间：周一至周四下午2点</li>
+                    <li class="last">地址：${contact['address']}</li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="friendLink">
+            <h5 class="footerConTit marginB">友情链接</h5>
+            <div class="friendLinkCon">
+                <a href="http://www.kuaiyong.com" target="_blank">快用苹果助手</a>
+                <a href="http://www.daixiaomi.com" target="_blank">贷小秘</a>
+                <a href="http://www.heheys.com/" target="_blank">喝喝云商</a>
+                <a href="http://www.dajia365.com/" target="_blank">美家</a>
+                <a href="http://www.yintai.com/" target="_blank">银泰网</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>
+                北京快服务科技有限公司
+                <a href="http://www.miitbeian.gov.cn" rel="nofollow">京ICP备15067274号</a>
+                TEL:010-57120953
+                <span class="jump">
+                    <a href="http://weibo.com/u/5537779057" target="_blank" rel="nofollow"><img src="${static_path}images/weibo.png"></a>
+                    <a href="http://www.lagou.com/gongsi/j87596.html" target="_blank" rel="nofollow"><img src="${static_path}images/pin.png"></a>
+                </span>
+            </p>
+        </div>
+    </div>
+</footer>
+<section class="fixFooter">
+    <div class="footerBg"></div>
+    <div class="footerContent">
+        <a href="http://dwz.cn/kfwnet" rel="nofollow" class="footerLogo floatLeft"></a>
+        <h3>快服务</h3>
+        <p>注册立享十五元新人劵</p>
+        <a href="http://dwz.cn/kfwnet" rel="nofollow" class="downLoad">APP下载</a>
+    </div>
+</section>
+<section style="display:none">
+<script type="text/javascript">
+var browser = { 
+        versions : function() { 
+            var u = navigator.userAgent, app = navigator.appVersion; 
+            return {//移动终端浏览器版本信息
+				mobile : !!u.match(/AppleWebKit.*Mobile.*/) 
+						|| !!u.match(/AppleWebKit/), //是否为移动终端
+				ios : !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+				android : u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+				iPhone : u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+				iPad: u.indexOf('iPad') > -1, //是否iPad
+			}; 
+		}(), 
+		language : (navigator.browserLanguage || navigator.language).toLowerCase() 
+    } 
+if(!browser.versions.mobile){
+	var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259107847'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1259107847' type='text/javascript'%3E%3C/script%3E"));
+}
+var menuBtn = document.getElementById("menuBtn");
+var menuWeb = document.getElementById("menuWeb");
+menuBtn.onclick = function(e){
+	menuWeb.style.left = '0';
+	this.style.display = 'none';
+	if(e.stopPropagation) {
+        e.stopPropagation();  
+    } else {  
+        e.cancelBubble = true;
+    } 
+}
+menuWeb.onclick = function(){
+	menuWeb.style.left = '100%';
+	menuBtn.style.display = 'block';
+}
+</script>
+</section>

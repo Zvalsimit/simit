@@ -1,0 +1,218 @@
+# coding: utf-8
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>${skill_title}${group_name}骑士列表_${group_name}</title>
+    <meta name="description" content="${skill_title}${group_name}骑士列表，包含骑士的列表信息，以及所能提供的服务种类等，为您选择骑士提供参考" />
+    <meta name="keywords" content="${skill_title}${group_name}骑士列表" />
+    <link rel="stylesheet" type="text/css" href="${static_path}css/couriers.css">
+    <link rel="stylesheet" type="text/css" href="${static_path}fonts/iconfont.css">
+    <script>
+    (function(doc,win){var resizeEvt="orientationchange" in win?"orientationchange":"resize",use_screen_base=640,base_size=parseInt(use_screen_base),docE=doc.documentElement,recalc=function(){var triggerRepaints=docE.clientWidth;var clientWidth=win.innerWidth>1000?1000:win.innerWidth;docE.style.fontSize=100*(clientWidth/base_size)+"px"};recalc();win.addEventListener(resizeEvt,recalc,false)})(document,window);
+    </script>
+</head>
+<body>
+	<header>
+        <div class="container">
+        	<p>当前位置：
+            <a href="/">首页</a> &gt; 骑士列表</p>
+        </div>
+    </header>
+    <div class="container">
+        <div class="nav_tab_show">
+            <div class="tab_wrap">
+                <div class="tab_item">
+                    <p class="tab_name">
+                    % if '0' == skill:
+                        全部类别
+                    % else:
+                        ${skill_title}
+                    % endif
+                    </p>
+                </div>
+                <div class="tab_item">
+                    <p class="tab_name">
+                    % if '1' == sort:
+                        距离最近
+                    % elif '2' == sort:
+                        评分最高
+                    % else:
+                        服务最多 
+                    % endif
+                    </p>
+                </div>
+                <div class="tab_item">
+                    <p class="tab_name">
+                    % if '1' == online:
+                        在线
+                    % else:
+                        全部
+                    % endif
+                    </p>
+                </div>
+            </div>
+            <div class="con_wrap">
+                <ul class="select_list show_child_list" data-key="skill">
+                    % if '0' == skill:
+                    <li data-value="0" class="selected">
+                    % else:
+                    <li data-value="0">
+                    % endif
+                        <a href="/${city}/0/${online}/${sort}/1.html">全部类别</a>
+                    </li>
+                    % for value in slist:
+                        % if not (value['child'] and len(value['child'])):
+                            % if str(value['id']) == skill:
+                            <li data-value="${value['id']}" class="selected">
+                            % else:
+                            <li data-value="${value['id']}">
+                            % endif
+                                <a href="/${city}/${value['id']}/${online}/${sort}/1.html">${value['title']}</a>
+                            </li>
+                        % else:
+                            <li data-value="${value['id']}">
+                                ${value['title']}
+                                <div class="child_list_wrap">
+                                    <ul class="child_list">
+                                        % for chil in value['child']:
+                                            % if str(chil['id']) == skill:
+                                            <li data-value="${chil['id']}" class="selected">
+                                            % else:
+                                            <li data-value="${chil['id']}">
+                                            % endif
+                                            <a href="/${city}/${chil['id']}/${online}/${sort}/1.html">${chil['title']}</a>
+                                            </li>  
+                                        %endfor
+                                    </ul>
+                                </div>
+                            </li>
+                        % endif
+                    % endfor
+                </ul>
+                <ul class="select_list" data-key="sort">
+                    % if '1' == sort:
+                    <li data-value="distance" class="selected">
+                    % else:
+                    <li data-value="distance">
+                    % endif
+                        <a href="/${city}/${skill}/${online}/1/1.html">距离最近</a>
+                    </li>
+                    % if '2' == sort:
+                    <li data-value="score" class="selected">
+                    % else:
+                    <li data-value="score">
+                    % endif
+                        <a href="/${city}/${skill}/${online}/2/1.html">评分最高</a>
+                    </li>
+                    % if '3' == sort:
+                    <li data-value="service" class="selected">    
+                    % else:
+                    <li data-value="service">    
+                    % endif
+                        <a href="/${city}/${skill}/${online}/3/1.html">服务最多</a>
+                    </li>
+                </ul>
+                <ul class="select_list" data-key="online">
+                    % if '1' == online:
+                    <li data-value="1" class="selected">
+                    % else:
+                    <li data-value="1">
+                    % endif
+                        <a href="/${city}/${skill}/1/${sort}/1.html">在线</a>
+                    </li>
+                    % if '0' == online:
+                    <li data-value="0" class="selected">
+                    % else:
+                    <li data-value="0">
+                    % endif
+                        <a href="/${city}/${skill}/0/${sort}/1.html">全部</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="tab_mask"></div>
+        <div class="rider_list">
+        % if len(clist):
+            % for value in clist:
+            <div class="rider_item" data-cid="${value['cid']}" data-cname="${value['name']}">
+                <a target="_blank" href="/courier/${city}/${skill}/${online}/${sort}/${page}/${value['cid']}.html">
+                <div class="left_wrap">
+                    <div class="head_wrap">
+                        % if value.get('head_portrait_url'):
+                        <img src="${value['head_portrait_url']}" alt="头像">
+                        % else:
+                        <img src="${static_path}images/head@2x.png" alt="头像">
+                        % endif
+                    </div>
+                    % if value['gender']==2:
+                    <i class="iconfont female">&#xe64f;</i>
+                    % elif value['gender']==1:
+                    <i class="iconfont male">&#xe63c;</i>
+                    % endif
+                </div>
+                <div class="center_wrap">
+                    <p class="name_wrap">
+                        ${value['nickname']}
+                        % if value['audit_status']:
+                        <i class="iconfont audit">&#xe650;</i>
+                        % endif
+                        % if value['guarantee_status']:
+                        <i class="iconfont audit">&#xe658;</i>
+                        % endif
+                    </p>
+                    <p class="distance">${value['distance']}km</p>
+                    <div class="clear_f"></div>
+                    <div class="skills_wrap">
+                        % for s in value['skills']:
+                        <span style="background:${s['color']}">${s['title']}</span>
+                        % endfor
+                    </div>
+                    <div class="status">
+                        <span class="star_wrap">
+                            % for i in range(0, int(value['score'])):
+                            <i class="iconfont star">&#xe630;</i>
+                            % endfor
+                            % for i in range(0, 5 - int(value['score'])):
+                            <i class="iconfont n_star">&#xe630;</i>
+                            % endfor
+                        </span>
+                        <span class="times">
+                            <i class="iconfont service">&#xe653;</i>
+                            服务${value['service_times']}次
+                        </span>
+                        <span class="online_status">
+                            <i class="iconfont online_icon">&#xe654;</i>
+                            % if value['online']:
+                            在线
+                            % else:
+                            离线
+                            % endif
+                        </span>
+                    </div>
+                </div>
+                <div class="clear_f"></div>
+                </a>
+            </div>
+            % endfor
+        % else:
+            <div class="has_no_more">暂时没有服务者了</div>
+        % endif
+        </div>
+        <div id="page">
+            % if page > 1:
+                <a href="/${city}/${skill}/${online}/${sort}/${page-1}.html">上一页</a>
+            % endif
+            % if len(clist) == page_capacity:
+                <a href="/${city}/${skill}/${online}/${sort}/${page+1}.html">下一页</a>
+            % endif
+        </div>
+    </div>
+    <script src="${static_path}js/zepto.min2.js"></script>
+    <script src="${static_path}js/jquery.js"></script>  
+    <script src="${static_path}js/couriers.js"></script>
+    <script src="${static_path}js/hm.js"></script>
+</body>
+</html>

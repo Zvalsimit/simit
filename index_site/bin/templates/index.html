@@ -1,0 +1,272 @@
+# coding: utf-8
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        %if city == 'index':
+            <title>快服务_本地即时生活服务平台_快服务官网。</title>
+        %else:
+            <title>${city_name}跑腿_${city_name}跑腿服务_${city_name}快服务官网。</title>
+        %endif
+        <%include file="meta.html"/>
+        <link type="text/css" rel="stylesheet" href="${static_path}css/main.css">
+        <script src="${static_path}js/jquery.js"></script>
+        <script src="${static_path}js/index.js"></script>
+        <script src="${static_path}js/hm.js"></script>
+    </head>
+    <body>
+        <%include file="header.html"/>
+        <section>
+            <div id="banner">
+            	<!--<div class="swiper-slide">
+                	<a href="http://cf.baidu.com/" class="bannerHref" rel="nofollow" target="_blank"></a>
+                </div>
+                <div class="swiper-slide"></div><div class="swiper-pagination"></div>-->
+                <h3 class="alignCenter">需要一个
+                	<span class="bannerBox">
+                        <span>
+                            <b></b>
+                            <font class="bannerCon">跑腿小哥</font>
+                        </span>
+                    </span>，帮我
+                    <span class="bannerBox">
+                        <span class="last">
+                            <b></b>
+                            <font class="bannerCon">买早餐</font>
+                        </span>
+                    </span>
+                </h3>
+            </div>
+        </section>
+        <section class="bgef">
+            <div class="container fontColor">
+                <h4 class="title alignCenter">四大优势</h4>
+                <div class="strengths conUl">
+                    <ul>
+                        <li>
+                            <img src="${static_path}images/strengths_1.png" alt="优质的周边服务">
+                            <p>聚合周边优质服务者</p>
+                        </li>
+                        <li>
+                            <img src="${static_path}images/strengths_2.png" alt="实名认证">
+                            <p>实名认证+服务保证金</p>
+                        </li>
+                        <li>
+                            <img src="${static_path}images/strengths_3.png" alt="线下培训">
+                            <p>闪电接单+快速服务</p>
+                        </li>
+                        <li>
+                            <img src="${static_path}images/strengths_4.png" alt="服务保证金">
+                            <p>明码标价+担保支付</p>
+                        </li>
+                    </ul>
+                	<div class="clear"></div>
+                </div>
+            </div>
+        </section>
+        <section class="bgf6 borderTop">
+            <div class="container fontColor paddingB alignCenter">
+                <h4 class="title">热门服务</h4>
+                <div class="service conUl" id="service">
+                    <ul>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1011/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_1.png" alt="送蛋糕">
+                                <p>送蛋糕</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1011/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_2.png" alt="送鲜花">
+                                <p>送鲜花</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1009/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_3.png" alt="买美食">
+                                <p>买美食</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1009/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_4.png" alt="买药品">
+                                <p>买药品</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1117/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_5.png" alt="修电脑">
+                                <p>修电脑</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1118/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_6.png" alt="修手机">
+                                <p>修手机</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1114/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_7.png" alt="修管道">
+                                <p>修管道</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1114/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_8.png" alt="修马桶">
+                                <p>修马桶</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1114/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_9.png" alt="修水电">
+                                <p>修水电</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1136/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_10.png" alt="宠物">
+                                <p>宠物</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1154/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_11.jpg" alt="家政">
+                                <p>家政</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1166/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_12.jpg" alt="美容">
+                                <p>美容</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1121/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_13.jpg" alt="代驾">
+                                <p>代驾</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1122/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_14.jpg" alt="接人">
+                                <p>接人</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1138/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_15.jpg" alt="陪练">
+                                <p>陪练</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1183/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_16.jpg" alt="交罚单">
+                                <p>交罚单</p>
+                            </a>
+                        </li>
+                        <li>
+                            %if 'index' == city:
+                            <a href="/city.html">
+                            %else:
+                            <a href="/${city}/1138/1/1/1.html" target="_blank">
+                            %endif
+                                <img src="${static_path}images/service_17.png" alt="健身">
+                                <p>健身</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn serviceBtn">查看更多</button>
+            </div>
+        </section>
+        <section class="bgef borderTop">
+            <div class="container fontColor">
+                <div class="enter conUl alignCenter">
+                    <ul>
+                        <li>
+                            <h4 class="title titleEnter">服务者入驻</h4>
+                            <span>
+                                <a href="http://mp.weixin.qq.com/s?__biz=MzIxNDA5NzYyMg==&mid=400299525&idx=1&sn=bc29727c5f0c4a8dd50ce14b8d371ac5#rd" rel="nofollow" target="_blank">
+                                	<img src="${static_path}images/enter.png" alt="服务者入驻">
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <h4 class="title titleEnter">城市合伙人计划</h4>
+                            <span>
+                            	<a href="http://x.eqxiu.com/s/FzAv0Jkt" rel="nofollow" target="_blank">
+                                	<img src="${static_path}images/partner.png" alt="城市合伙人计划">
+           </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <%include file="footer.html"/>
+    </body>
+</html>

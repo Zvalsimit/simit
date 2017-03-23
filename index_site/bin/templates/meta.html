@@ -1,0 +1,11 @@
+# coding: utf-8
+<meta charset="utf-8" />
+%if city == 'index':
+    <meta name="description" content="快服务，本地即时生活服务平台，提供跑腿代办、家政维修、宠物美业、兼职小时工服务。全国加盟热线400-068-0101。" />
+    <meta name="keywords" content="快服务官网，本地即时生活服务，全国加盟，商家配送，跑腿代办，家政维修，宠物美业、兼职小时工。" />
+%else:
+    <meta name="description" content="${city_name}快服务官网，是${city_name}本地专业的即时生活服务平台，提供${city_name}跑腿代办、家政维修、宠物美业、兼职小时工服务。全国加盟热线4000-680-101。"/>
+    <meta name="keywords" content="${city_name}跑腿，${city_name}跑腿服务，${city_name}快服务官网，本地即时生活服务，商家配送、跑腿代办、家政维修、宠物美业、兼职小时工。" />
+%endif
+<meta name="format-detection" content="telephone=no" />
+<link rel="icon" href="${static_path}images/icon.png">

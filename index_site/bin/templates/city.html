@@ -1,0 +1,38 @@
+# coding: utf-8
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>【快服务】本地即时生活服务平台_快服务官网。</title>
+        <link type="text/css" rel="stylesheet" href="${static_path}css/main.css">
+    </head>
+    <body>
+        <header class="addressBg">
+        </header>
+        <section>
+            <div class="container">
+                <h4 class="title addressTit">所有开通城市:</h4>
+                <div class="addressSel">
+                % if len(cities) > 0:
+                    % for k, v in cities:
+                     <ul>
+                        <li>
+                            <b>${k}</b>
+                        % for c in v: 
+                            % if qs:
+                                <a href="/${c['city']}.html?${qs}">${c['city_name']}</a>
+                            % else:
+                                <a href="/${c['city']}.html">${c['city_name']}</a>
+                            % endif
+                        % endfor
+                        </li>  
+                    </ul>
+                    % endfor
+                % else:
+                请稍后重试。                        
+                % endif
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
