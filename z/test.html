@@ -46,11 +46,36 @@ var emptyObj = {};
 var YAxisPoint = Point.bind(emptyObj, 0/*x*/);
 var pp = new YAxisPoint(1);
 console.log(pp.toString())
-		</script>-->
-        <script>
-			console.log(null == undefined,undefined == false)
+		</script>
+        console.log(null == undefined,undefined == false)
 			var a=[1, 2, 3];
-    		console.log(a.join());
+    		console.log(a.join());-->
+        <script>
+		function power2fs(x) {return (x & ( x - 1)) === 0 ? (x-1).toString(2).length : false;}
+		var str = "Ofg5Vw5zqFDKsA1SOnHMZWeMO2+aQKm9fRui2qbsjeJuO+19HTANND83mtsI5g9XZJEX4Y5uZe5XHUkJ3RUmxlb5pRxeV7nF4HsEIH9J6EyMAeZr03A+TMq4KT7MQQM4CnjcHoykT2/UkFK0vcw56A==";
+		var str1 = "w1`wuELmrQzjDgMO1qHaUr4zWkGvEOwi@x2KrgJmoOwf0lfkn44VvdW[cjiUhtmLtCz15n[[csw-JDf2TWUzfJhXD[K0P21:h7Su:e[z:v0)2l4cW-`CC;sj5h5kQ[cK:D[Au2ul;Jou`E)Etc2fqC??";
+		var c = function(e) {
+			if (e) {
+				for (var r = "", t = 0, n = e.length; n > t; t++) r += String.fromCharCode(2 ^ e.charCodeAt(t));
+				return r
+			}
+			return ""
+		}
+		var d = function(e) {
+			if (e) {
+				for (var r = "", t = 0, n = e.length; n > t; t++) r += String.fromCharCode(2 ^ e.charCodeAt(t));
+				return r
+			}
+			return ""
+		}
+		var f = function(e) {
+			if (e) {
+				for (var r = "", t = 0, n = e.length; n > t; t++) r += String.fromCharCode(0 ^ e.charCodeAt(t));
+				return r
+			}
+			return ""
+		}
+		console.log(c(str),d(d(str1)))
         </script>
     </body>
 </html>
