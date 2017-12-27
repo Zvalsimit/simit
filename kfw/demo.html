@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <style>
+		.dialog{
+			display:none;
+			width:100%;
+			height:100%;
+			position:fixed;
+			left:0;
+			top:0;
+		}
+		.dialog.show{
+			display:block;
+		}
+		.dialog_bg{
+			position:absolute;
+			width:100%;
+			height:100%;
+			top:0;
+			left:0;
+			background:rgba(0,0,0,.5);
+		}
+		.dialog_content{
+			position:absolute;
+			width:80%;
+			height:82vh;
+			left:10%;
+			top:10vh;
+			background:#fff;
+		}
+		.dialog_header{
+			height:8vh;
+			line-height:8vh;
+		}
+		.dialog_header .dialog_title{
+			font-size:1.4em;
+		}
+		.dialog_header .dialog_cancel{
+			font-size:1.4em;
+		}
+		.dialog_body{
+			height:64vh;
+			overflow:auto;
+			border-top:1px solid #ccc;
+		}
+		.dialog_body.heigher{
+			height:72vh;
+		}
+        </style>
+        <script src="static/js/jquery-1.10.2.js" type="text/javascript"></script>
+    </head>
+    <body>
+    	<input id="example" type="text">
+        <input id="example1" type="text">
+        <input id="mobile" type="text">
+        <button id="button">xxxxx</button>
+        <button id="button1">xxxx11</button>
+        <div class="dialog">
+            <div class="dialog_bg"></div>
+            <div class="dialog_content">
+                <div class="dialog_header">
+                	<span class="dialog_title">xxxxx</span>
+                	<button class="dialog_close">&times;</button>
+                </div>
+                <div class="dialog_body heigher">
+                </div>
+                <div class="dialog_foot">
+                	<button class="dialog_cancel">取消</button>
+                    <button class="dialog_sure">确定</button>
+                </div>
+            </div>
+        </div>
+<script>
+var base = (function(){
+	var comArr = [];
+	var validate = {
+		// 为空
+		isNotEmpty: function(value,errorMsg) {
+			if(value == '') {
+				comArr["d"].call(base,errorMsg)
+				return false;
+			}else{
+				return true;
+			}
+		},
+		// 最小长度
+		minLength: function(value,errorMsg,length) {
+			if(value.length < length) {
+				comArr["d"].call(base,errorMsg)
+				return false;
+			}else{
+				return true;
+			}
+		},
+		// 数字
+		number: function(value,errorMsg) {
+			if(!/^\d*$/.test(value)) {
+				comArr["d"].call(base,errorMsg);
+				return false;
+			}else{
+				return true;
+			}
+		},
+		// 号码格式
+		mobile: function(value,errorMsg) {
+			if(!/^1\d{10}$|^(0\d{2,3})?\d{7,8}$/.test(value)) {
+				comArr["d"].call(base,errorMsg);
+				return false;
+			}else{
+				return true;
+			}
+		} 
+	};
+	comArr["v"] = function(){
+		var argArr = Array.prototype.slice.call(arguments);
+		return argArr.every(function(e){
+			return e.v.every(function(el,index){
+				return validate[el.split(":")[0]](e.ob,e.errorMsg[index],el.split(":")[1])
+			})
+		})
+	};
+	comArr["d"] = function(msg,tit,fn,t){
+		if(!this.dialog_body){
+			this.dialog();
+		}
+		if(typeof msg === 'string'){
+			this.dialog_body.text(msg);
+		}else{
+			return;
+		}
+		if(typeof tit === 'string'){
+			this.dialog_title.text(tit);
+		}
+		if(typeof fn === 'function'&&typeof t === 'boolean'&&t){
+			//按键绑定事件
+			this.dialog_foot.show();
+			this.dialog_body.removeClass(this.class);
+			this.dialog_sure.on("click",fn);
+		}else if(typeof fn === 'function'&&typeof t === 'number'&&t){
+			//定时时间
+			this.dialog_body.addClass(this.class);
+			this.dialog_foot.hide();
+			this.time = setInterval(fn,t);
+		}else if(typeof fn === 'boolean'&&fn){
+			//按键
+			this.dialog_foot.show();
+			this.dialog_body.removeClass(this.class);
+			bind_(this.dialog_sure,'click',this.init.bind(this));
+		}else{
+			this.dialog_body.addClass(this.class);
+			this.dialog_foot.hide();
+		}
+		this.dialog.show();
+	};
+	comArr["s"] = function(){
+		var search = decodeURI(document.location.search);
+		return search.replace(/(^\?)/, '').split('&').reduce(function(result, item){
+			values = item.split('=');
+			result[values[0]] = values[1];
+			return result;
+		}, {});
+	};
+	comArr["a"] = function(u,t,d,fn){
+		$.ajax({
+			url : u,
+			type : t,
+			data : d,
+			success: function(res){
+				if (typeof data === 'string'){
+					res = JSON.parse(res);
+				}
+				if (res.respcd === '0000'){
+					fn.apply(null,res)
+				}else{
+					comArr["d"].call(base,res.resperr)
+				}
+			},
+			error: function(){
+				comArr["d"].call(base,"网络错误");
+			}
+		})
+	};
+	var bind_ = function(a,e,fn){
+		$(a).on(e,fn);
+	};
+	function common(){
+		this.time = null;
+		this.result = null;
+	};
+	common.prototype = {
+		assign : function(){
+			var argsArr = Array.prototype.slice.call(arguments),that=this;
+			argsArr.every(function(e){
+				return that.result = comArr[e.a].apply(that,e.data);
+			})
+			return this.result;
+		},
+		dialog : function(){
+			var that = this;
+			this.dialog = $(".dialog");
+			this.dialog_body = $(".dialog_body");
+			this.dialog_title = $(".dialog_title");
+			this.dialog_close = $(".dialog_close");
+			this.dialog_foot = $(".dialog_foot");
+			this.dialog_cancel = $(".dialog_cancel");
+			this.dialog_sure = $(".dialog_sure");
+			this.class = "heigher";
+			bind_(this.dialog_close,'click',this.init.bind(this));
+			bind_(this.dialog_cancel,'click',this.init.bind(this));
+		},
+		init : function(){
+			clearInterval(this.time);
+			this.dialog_sure.unbind();
+			this.dialog.hide();
+		},
+		search : function(city,addr,fn){
+			var local = new BMap.LocalSearch(city,{
+				onSearchComplete: function(results){
+					if (local.getStatus() == BMAP_STATUS_SUCCESS){
+						fn(results.vr);
+					}
+				}
+			});
+			local.search(addr);
+		}
+	};
+	return new common();
+})();
+(function(){
+	$("#button").click(function(){
+		base.assign({
+			a : "d",
+			data : ['请填写example','',ccc,true]
+		})
+	});
+	$("#button1").click(function(){
+		base.assign({
+			a : "v",
+			data : [{
+					ob : $("#example").val(),
+					v : ['isNotEmpty'],
+					errorMsg : ['请填写example']
+				},{
+					ob : $("#example1").val(),
+					v : ['isNotEmpty','minLength:6',"number"],
+					errorMsg : ['请填写example1','请example1不可少于6位数',"请填写数字"]
+				},{
+					ob : $("#mobile").val(),
+					v : ['isNotEmpty','mobile'],
+					errorMsg : ['请填写mobile',"请填写正确的电话号码"]
+				}]
+		},{
+			a : "a",
+			data : ['/drd/v1/user/getGroupName','post','',ccc]
+		})
+	});
+	var sea = base.assign({a:"s"})
+	console.log(sea["xxx"])
+	function ccc(){
+		alert("aaaaaaaa");
+		base.init();
+	}
+})();
+</script>
+    </body>
+</html>
