@@ -19,17 +19,20 @@
                 var _bind = function(fn){
                     var that = this;
                     this.tar.on("click","."+this.gopg+",."+this.backpg,function(){
+                        $(this).attr("disabled",true).css(that.back_css);
                         if($(this).hasClass(that.backpg)&&that.index>1){
-                            fn.call(null,--that.index);
+                            that.index--;
+                            fn.call(null,that.id,that.size,false);
                         }else if(!$(this).hasClass(that.backpg)){
-                            fn.call(null,++that.index);
+                            that.index++;
+                            fn.call(null,that.id,that.size,true);
                         }
-                        that.base();
                     })
                 }
                 var page = function(){
                     this.flag = true;
                     this.size = 10;
+                    this.id = 0;
                     this.index = 1;
                     this.tar = null;
                     this.gopg = 'go_page';
@@ -60,14 +63,16 @@
                     }
                 }
                 page.prototype = {
-                    init : function(ob,fn){
+                    init : function(ob,s,fn){
                         if(typeof ob !== "boolean"){
                             this.tar = ob;
+                            this.size = 
                             this.tar.append(pageBtn.call(this));
                             _bind.call(this,fn)
                             this.render()
                         }else{
                             this.flag = ob;
+                            this.id = s;
                             this.base()
                         }
                     },
@@ -82,6 +87,7 @@
                         }
                         if(!this.flag){
                             $("."+this.gopg).attr("disabled",true).css(this.back_css);
+                            this.index --;
                         }else{
                             $("."+this.gopg).removeAttr("disabled").css(this.css)
                         }
@@ -90,11 +96,11 @@
                 }
                 return new page();
             })();
-            function go(index){
-                var s = index<4?true:false;
-                page.init(s);
+            function go(){
+                var s = true;
+                setTimeout(function(){page.init(s,122)},100);
             }
-            page.init($("#page_wrap"),go)
+            page.init($("#page_wrap"),10,go)
         })
         </script>
     </body>
