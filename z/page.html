@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <link rel="icon" href="${static_path}images/icon.png">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <script src="js/jquery.js"></script>
+    </head>
+    <body>
+    	<div id="page_wrap"></div>
+        <script type="text/javascript">
+        $(function(){
+            var page = (function(){
+                var pageBtn = function(){
+                    return "<button class='"+this.backpg+"'>上一页</button><span>第<font class='"+this.text+"'>"+this.index+"</font>页</span><button class='"+this.gopg+"'>下一页</button>"
+                }
+                var _bind = function(fn){
+                    var that = this;
+                    this.tar.on("click","."+this.gopg+",."+this.backpg,function(){
+                        if($(this).hasClass(that.backpg)&&that.index>1){
+                            fn.call(null,--that.index);
+                        }else if(!$(this).hasClass(that.backpg)){
+                            fn.call(null,++that.index);
+                        }
+                        that.base();
+                    })
+                }
+                var page = function(){
+                    this.flag = true;
+                    this.size = 10;
+                    this.index = 1;
+                    this.tar = null;
+                    this.gopg = 'go_page';
+                    this.backpg = 'back_page';
+                    this.text = "tar_index";
+                    this.disab = "";
+                    this.tcss = {
+                        "padding" : "5px",
+                        "width" : "100%",
+                        "line-height": "20px",
+                        "font-size": "14px",
+                        "box-sizing": "border-box"
+                    };
+                    this.back_css = {
+                        "text-decoration": "none",
+                        "background": '#dfdfdf',
+                        "border": "1px solid #ddd",
+                        "color": "#fff",
+                    },
+                    this.css = {
+                        "text-decoration": "none",
+                        "background": '#fff',
+                        "border": "1px solid #ddd",
+                        "color": "#999",
+                    },
+                    this.text_css = {
+                        "padding": "0 10px",
+                    }
+                }
+                page.prototype = {
+                    init : function(ob,fn){
+                        if(typeof ob !== "boolean"){
+                            this.tar = ob;
+                            this.tar.append(pageBtn.call(this));
+                            _bind.call(this,fn)
+                            this.render()
+                        }else{
+                            this.flag = ob;
+                            this.base()
+                        }
+                    },
+                    render : function(){
+                        this.tar.css(this.tcss).children("."+this.backpg).css(this.back_css).siblings("."+this.gopg).css(this.css).siblings("span").css(this.text_css)
+                    },
+                    base : function(){
+                        if(this.index===1){
+                            $("."+this.backpg).attr("disabled",true).css(this.back_css);
+                        }else{
+                            $("."+this.backpg).removeAttr("disabled").css(this.css)
+                        }
+                        if(!this.flag){
+                            $("."+this.gopg).attr("disabled",true).css(this.back_css);
+                        }else{
+                            $("."+this.gopg).removeAttr("disabled").css(this.css)
+                        }
+                        $("."+this.text).text(this.index);
+                    }
+                }
+                return new page();
+            })();
+            function go(index){
+                var s = index<4?true:false;
+                page.init(s);
+            }
+            page.init($("#page_wrap"),go)
+        })
+        </script>
+    </body>
+</html>
