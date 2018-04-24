@@ -42,96 +42,102 @@ var addSearch = (function(){
 })();
 //history
 var historyBody = (function(){
-	var _bind = function(){
-		var that = this;
-		this.obj.on("click",'li',function(){
+    var _bind = function(){
+        var that = this;
+        this.obj.on("click",'li',function(){
+		if(that.index != $(this).index()){
 			that.index = sessionStorage.index = $(this).index();
-			if(location.pathname!==that.historyArr[that.index].href){
-				location.href = $(this).attr("data-href");
-			}
-			$(this).addClass("active").siblings().removeClass("active");
-		});
-		this.obj.on("click",'li b',function(){
-			if(that.historyArr.length>1&&that.index>$(this).parent().index()){
-				that.index--;
-			}else if(that.historyArr.length>1&&that.index===$(this).parent().index()===0){
-				that.index++;
-			}else if(that.historyArr.length>1&&that.index>0&&that.index===$(this).parent().index()){
-				that.index--;
-			}else if(that.historyArr.length ===1 ){
-				return false;
-			}
-			that.historyArr.splice($(this).parent().index(),1);
-			addHistory.call(that);
-			return false;
-		});
-		this.menu.on("click","li a",function(){
-			if($(this).attr("data-href")&&!proof.call(that,$(this).text())&&that.historyArr.length<5){
-				that.historyArr.push({href:$(this).attr("data-href"),text:$(this).text()});
-				that.index = that.historyArr.length-1;
-				addHistory.call(that);
-			}else if($(this).attr("data-href")&&!proof.call(that,$(this).text())&&that.historyArr.length>=5){
-				that.historyArr.shift();
-				that.historyArr.push({href:$(this).attr("data-href"),text:$(this).text()});
-				that.index = that.historyArr.length-1;
-				addHistory.call(that);
-			}else if($(this).attr("data-href")){
-				addHistory.call(that);
-			}
-		});
-		$("#groups,#group_site").on("click",function(){
-			if($(this).attr("data-href")&&!proof.call(that,$(this).children(".title").text())&&that.historyArr.length<5){
-				that.historyArr.push({href:$(this).attr("data-href"),text:$(this).children(".title").text()});
-				that.index = that.historyArr.length-1;
-				addHistory.call(that);
-			}else if($(this).attr("data-href")&&!proof.call(that,$(this).children(".title").text())&&that.historyArr.length>=5){
-				that.historyArr.shift();
-				that.historyArr.push({href:$(this).attr("data-href"),text:$(this).children(".title").text()});
-				that.index = that.historyArr.length-1;
-				addHistory.call(that);
-			}else if($(this).attr("data-href")){
-				addHistory.call(that);
-			}
-		});
-	};
-	var proof = function(text){
-		var that = this;
-		return this.historyArr.some(function(e,i){
-			if(text===e.text){
-				that.index = i;
-				return true;
-			}
-		});
-	};
-	var addHistory = function(){
-		var that = this;
-		this.str = '';
-		this.historyArr.forEach(function(i){
-			that.str += "<li data-href='"+i.href+"'>"+i.text+"<b>x</b></li>";
-		});
-		this.obj.html(this.str);
-		sessionStorage.index = this.index;
-		this.obj.find("li").eq(this.index).addClass("active");
-		sessionStorage.historyArr = JSON.stringify(this.historyArr);
-		if(this.url!==this.historyArr[this.index].href){
-			location.href = this.historyArr[this.index].href;
 		}
-	};
-	var historyBody = function(){
-		this.str = '';
-		this.url = location.search?location.pathname+location.search:location.pathname;
-		this.historyArr = sessionStorage.historyArr?JSON.parse(sessionStorage.historyArr):[{href:this.url,text:document.title.split("|")[1]?document.title.split("|")[1]:document.title}];
-		this.index = sessionStorage.index?parseInt(sessionStorage.index):0;//指针
-	};
-	historyBody.prototype={
-		rander : function(ob,menu){
-			this.obj = $(ob);
-			this.menu = $(menu);
-			addHistory.call(this);
-			_bind.call(this);
-		}
-	};
-	return new historyBody();
+		addHistory.call(that,true);
+        });
+        this.obj.on("click",'li b',function(){
+            if(that.historyArr.length>1&&that.index>$(this).parent().index()){
+                that.index--;
+            }else if(that.historyArr.length>1&&that.index===$(this).parent().index()===0){
+                that.index++;
+            }else if(that.historyArr.length>1&&that.index>0&&that.index===$(this).parent().index()){
+                that.index--;
+            }else if(that.historyArr.length ===1 ){
+                return false;
+            }
+		that.newUrl = '';
+            that.historyArr.splice($(this).parent().index(),1);
+            addHistory.call(that);
+            return false;
+        });
+        this.menu.on("click","li a",function(){
+		that.addHistory($(this).attr("data-href"),$(this).text());
+        });
+        $("#groups,.data_href").on("click",function(){
+		that.addHistory($(this).attr("data-href"),$(this).children(".title").text());
+        });
+    };
+    var proof = function(text){
+        var that = this;
+        return this.historyArr.some(function(e,i){
+            if(text===e.text){
+                that.index = i;
+                return true;
+            }
+        });
+    };
+    var addHistory = function(arg){
+	var that = this;
+        this.str = '';
+        this.historyArr.forEach(function(i,ind){
+		that.str += "<li data-href='"+i.href+"'>"+i.text+"<b>x</b></li>";
+		if(!arg&&$(that.contain[ind]).find("iframe").attr("src")!==i.href){
+			$(that.contain[ind]).find("iframe").attr("src",i.href);
+		}else if(arg&&($(that.contain[ind]).find("iframe").attr("src")!==i.href)&&(ind==that.index)){
+			$(that.contain[ind]).find("iframe").attr("src",i.href);
+		}else if(!arg&&that.newUrl&&(that.newUrl!==i.href)&&(ind==that.index)){
+                        i.href = that.newUrl;
+                        $(that.contain[ind]).find("iframe").attr("src",i.href);
+                }
+        });
+        this.obj.html(this.str);
+        sessionStorage.index = this.index;
+	$(this.contain[this.index]).addClass(that.class).siblings(".iframe-box").removeClass(that.class);
+        this.obj.find("li").eq(this.index).addClass("active");
+        sessionStorage.historyArr = JSON.stringify(this.historyArr);
+    };
+    var historyBody = function(){
+        this.str = '';
+	this.box = null;
+        this.url = '/bmis/view/information';
+        this.title = "必读信息";
+	    this.newUrl = '';
+        this.historyArr = sessionStorage.historyArr?JSON.parse(sessionStorage.historyArr):[{href:this.url,text:this.title}];
+        this.index = sessionStorage.index?parseInt(sessionStorage.index):0;//指针
+	this.contain = Array.prototype.slice.call($(".iframe-box"));
+	this.class = "iframe_active";
+    };
+    historyBody.prototype={
+        rander : function(ob,menu,ele,cal){
+            this.obj = $(ob);
+            this.menu = $(menu);
+            addHistory.call(this,true);
+            _bind.call(this);
+        },
+	addHistory : function(href,text){
+		this.newUrl = href;
+		if(href&&!proof.call(this,text)&&this.historyArr.length<5){
+                this.historyArr.push({href:href,text:text});
+                this.index = this.historyArr.length-1;
+                addHistory.call(this);
+            }else if(href&&!proof.call(this,text)&&this.historyArr.length>=5){
+                this.historyArr.shift();
+                this.historyArr.push({href:href,text:text});
+		this.box = this.contain.shift();
+		this.contain.push(this.box);
+                this.index = this.historyArr.length-1;
+                addHistory.call(this);
+            }else if(href){
+                addHistory.call(this);
+            }
+	}
+    };
+    return new historyBody();
 })();
 $(function() {
 	new addSearch().init("#search",[1,2]);

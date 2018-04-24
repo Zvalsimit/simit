@@ -66,13 +66,14 @@
                     init : function(ob,s,fn){
                         if(typeof ob !== "boolean"){
                             this.tar = ob;
-                            this.size = 
+                            this.size = s;
                             this.tar.append(pageBtn.call(this));
                             _bind.call(this,fn)
                             this.render()
                         }else{
                             this.flag = ob;
-                            this.id = s;
+                            this.id = s?s:this.id;
+                            this.index = fn?1:(this.index?this.index:1);
                             this.base()
                         }
                     },
@@ -101,6 +102,11 @@
                 setTimeout(function(){page.init(s,122)},100);
             }
             page.init($("#page_wrap"),10,go)
+            page.init(false)
+            setTimeout(function(){page.init(true,122)},4000);
+            setTimeout(function(){page.init(false,'',true)},8000);
+            setTimeout(function(){page.init(false)},9000);
+            setTimeout(function(){page.init(true,100,true)},12000);
         })
         </script>
     </body>
