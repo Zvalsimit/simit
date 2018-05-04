@@ -1,4 +1,0 @@
-/**assign_go.wxss**/
-.picker text{
-  margin-left: .5rem;
-}
