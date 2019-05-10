@@ -3,9 +3,111 @@
     <head>
         <meta charset="utf-8" />
         <title></title>
+        <script src="static/js/jquery-1.10.2.js" type="text/javascript"></script>
     </head>
     <body>
-    	<div id="example"></div>
+    	<input id="example" type="text">
+        <input id="example1" type="text">
+        <input id="mobile" type="text">
+<script>
+var base = (function(){
+	var comArr = [];
+	var validate = {
+		isNotEmpty: function(value,errorMsg) {
+			if(value == '') {
+				console.log(errorMsg)
+				return false;
+			}else{
+				return true;
+			}
+		},
+		// 限制最小长度
+		minLength: function(value,errorMsg,length) {
+			if(value.length < length) {
+				console.log(errorMsg,length)
+				return false;
+			}else{
+				return true;
+			}
+		},
+		// 手机号码格式
+		mobile: function(value,errorMsg) {
+			if(!/^1\d{10}$|^(0\d{2,3})?\d{7,8}$/.test(value)) {
+				console.log(errorMsg);
+				return false;
+			}else{
+				return true;
+			}
+		} 
+	}
+	comArr["v"] = function(){
+		var argArr = Array.prototype.slice.call(arguments);
+		return argArr.every(function(e){
+			return e.v.every(function(el,index){
+				return validate[el.split(":")[0]](e.ob,e.errorMsg[index],el.split(":")[1])
+			})
+		})
+	};
+	comArr["s"] = function(){
+		var search = decodeURI(document.location.search);
+		return search.replace(/(^\?)/, '').split('&').reduce(function(result, item){
+			values = item.split('=');
+			result[values[0]] = values[1];
+			return result;
+		}, {});
+	};
+	comArr["a"] = function(u,t,d,fn){
+		$.ajax({
+			url : u,
+			type : t,
+			data : d,
+			success: function(res){
+				if (typeof data === 'string'){
+					res = JSON.parse(res);
+				}
+				if (res.respcd === '0000'){
+					fn.apply(this,res)
+				}else{
+					
+				}
+			}
+		})
+	};
+	function common(){
+		this.list = [];
+	};
+	common.prototype = {
+		assign : function(){
+			var argsArr = Array.prototype.slice.call(arguments),that=this;
+			argsArr.every(function(e){
+				return comArr[e.a].apply(that,e.data);
+			})
+		},
+	};
+	return new common();
+})()
+base.assign({
+	a : "v",
+	data : [{
+			ob : $("#example").val(),
+			v : ['isNotEmpty'],
+			errorMsg : ['请填写example']
+		},{
+			ob : $("#example1").val(),
+			v : ['isNotEmpty','minLength:6'],
+			errorMsg : ['请填写example1','请example1不可少于6位数']
+		},{
+			ob : $("#mobile").val(),
+			v : ['isNotEmpty','mobile'],
+			errorMsg : ['请填写mobile',"请填写正确的电话号码"]
+		}]
+},{
+	a : "a",
+	data : ['/drd/v1/user/getGroupName','post','', function(data){console.log('1')}]
+})
+</script>
+    </body>
+</html>
     	<!--<script type="text/javascript">
 			/* min/max number in an array */
 var numbers = [15, 6, 2, 3, 7];
@@ -50,32 +152,3 @@ console.log(pp.toString())
         console.log(null == undefined,undefined == false)
 			var a=[1, 2, 3];
     		console.log(a.join());-->
-        <script>
-		function power2fs(x) {return (x & ( x - 1)) === 0 ? (x-1).toString(2).length : false;}
-		var str = "Ofg5Vw5zqFDKsA1SOnHMZWeMO2+aQKm9fRui2qbsjeJuO+19HTANND83mtsI5g9XZJEX4Y5uZe5XHUkJ3RUmxlb5pRxeV7nF4HsEIH9J6EyMAeZr03A+TMq4KT7MQQM4CnjcHoykT2/UkFK0vcw56A==";
-		var str1 = "w1`wuELmrQzjDgMO1qHaUr4zWkGvEOwi@x2KrgJmoOwf0lfkn44VvdW[cjiUhtmLtCz15n[[csw-JDf2TWUzfJhXD[K0P21:h7Su:e[z:v0)2l4cW-`CC;sj5h5kQ[cK:D[Au2ul;Jou`E)Etc2fqC??";
-		var c = function(e) {
-			if (e) {
-				for (var r = "", t = 0, n = e.length; n > t; t++) r += String.fromCharCode(2 ^ e.charCodeAt(t));
-				return r
-			}
-			return ""
-		}
-		var d = function(e) {
-			if (e) {
-				for (var r = "", t = 0, n = e.length; n > t; t++) r += String.fromCharCode(2 ^ e.charCodeAt(t));
-				return r
-			}
-			return ""
-		}
-		var f = function(e) {
-			if (e) {
-				for (var r = "", t = 0, n = e.length; n > t; t++) r += String.fromCharCode(0 ^ e.charCodeAt(t));
-				return r
-			}
-			return ""
-		}
-		console.log(c(str),d(d(str1)))
-        </script>
-    </body>
-</html>
