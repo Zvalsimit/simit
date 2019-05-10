@@ -53,40 +53,40 @@
     </body>
     <script type="text/javascript">
 	// 计算乘法
-var mult = function(){
-    var a = 1;
-    for(var i = 0,ilen = arguments.length; i < ilen; i+=1) {
-        a = a*arguments[i];
-    }
-    return a;
-};
-// 计算加法
-var plus = function(){
-    var a = 0;
-    for(var i = 0,ilen = arguments.length; i < ilen; i+=1) {
-        a += arguments[i];
-    }
-    return a;
-}
-// 代理函数
-var proxyFunc = function(fn) {
-    var cache = {};  // 缓存对象
-    return function(){
-        var args = Array.prototype.join.call(arguments,',');
-		console.log(args)
-        if(args in cache) {
-			console.log(args)
-            return cache[args];   // 使用缓存代理
+    var mult = function(){
+        var a = 1;
+        for(var i = 0,ilen = arguments.length; i < ilen; i+=1) {
+            a = a*arguments[i];
         }
-        return cache[args] = fn.apply(this,arguments);
+        return a;
+    };
+    // 计算加法
+    var plus = function(){
+        var a = 0;
+        for(var i = 0,ilen = arguments.length; i < ilen; i+=1) {
+            a += arguments[i];
+        }
+        return a;
     }
-};
-var proxyMult = proxyFunc(mult);
-console.log(proxyMult(1,2,3,4)); // 24
-console.log(proxyMult(1,2,3,4)); // 缓存取 24
+    // 代理函数
+    var proxyFunc = function(fn) {
+        var cache = {};  // 缓存对象
+        return function(){
+            var args = Array.prototype.join.call(arguments,',');
+    		console.log(args)
+            if(args in cache) {
+    			console.log(args)
+                return cache[args];   // 使用缓存代理
+            }
+            return cache[args] = fn.apply(this,arguments);
+        }
+    };
+    var proxyMult = proxyFunc(mult);
+    console.log(proxyMult(1,2,3,4)); // 24
+    console.log(proxyMult(1,2,3,4)); // 缓存取 24
 
-var proxyPlus = proxyFunc(plus);
-console.log(proxyPlus(1,2,3,4));  // 10
-console.log(proxyPlus(1,2,3,4));  // 缓存取 10
+    var proxyPlus = proxyFunc(plus);
+    console.log(proxyPlus(1,2,3,4));  // 10
+    console.log(proxyPlus(1,2,3,4));  // 缓存取 10
     </script>
 </html>
